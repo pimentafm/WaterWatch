@@ -8,3 +8,7 @@ docker run --name gis -e POSTGRES_PASSWORD=gis -e POSTGRES_DB=gis -e POSTGRES_US
 dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 dotnet tool install --global dotnet-ef
 dotnet add package Microsoft.EntityFrameworkCore.Design
+
+## Run migrations
+dotnet ef migrations add InitialMigration
+dotnet ef database update

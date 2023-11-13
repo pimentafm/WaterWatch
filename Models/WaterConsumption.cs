@@ -10,7 +10,7 @@ namespace WaterWatch.Models
         public int Id { get; set; }
         public required string neighbourhood { get; set; }
         public required string suburb_group { get; set; }
-        public int averageMontlyKL { get; set; }
+        public int averageMonthlyKL { get; set; }
         public required string coordinates { get; set; }
     }
 }

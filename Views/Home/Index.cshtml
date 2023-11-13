@@ -177,14 +177,14 @@
             // Convert the coordinates value to a javascript array
             var conv_poly = JSON.parse(item.coordinates);
             var poly = L.polygon(conv_poly, {
-                fillColor: getColor(item.averageMontlyKL),
+                fillColor: getColor(item.averageMonthlyKL),
                 color: 'white',
                 fillOpacity: 0.8
             });
             poly.bindPopup(
                 "<h4><b>Suburb Group:</b> [" + item.suburb_group.toString() + "]</h4>" +
                 "<h4><b>Neighbourhood: " + item.neighbourhood.toString() + "</h4>" +
-                "<h4><b>Water Consumption: " + (item.averageMontlyKL ? item.averageMontlyKL.toString() : "NaN") + " KL </h4>"
+                "<h4><b>Water Consumption: " + (item.averageMonthlyKL ? item.averageMonthlyKL.toString() : "NaN") + " KL </h4>"
             );
 
             poly.on('mouseover', function (e) {
@@ -267,8 +267,8 @@
                 var bar_colors = [];
 
                 obj.forEach(o => {
-                    y_data.push(o.averageMontlyKL);
-                    bar_colors.push(getColor(o.averageMontlyKL));
+                    y_data.push(o.averageMonthlyKL);
+                    bar_colors.push(getColor(o.averageMonthlyKL));
                 });
 
                 var data_array = Object.values(y_data);

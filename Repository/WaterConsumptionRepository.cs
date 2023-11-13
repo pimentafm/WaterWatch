@@ -26,7 +26,7 @@ namespace WaterWatch.Repository
 
         public async Task<IEnumerable<WaterConsumption>> GetTopConsumers()
         {
-            return await _context.Consumptions.OrderByDescending(c => c.averageMontlyKL).Take(10).ToListAsync();
+            return await _context.Consumptions.OrderByDescending(c => c.averageMonthlyKL).Take(10).ToListAsync();
         }
 
         public void SaveData()
@@ -37,7 +37,7 @@ namespace WaterWatch.Repository
             {
                 Console.WriteLine("No data found in database. Adding data from JSON file.");
 
-                var geojson = File.ReadAllText("/home/fernando/Downloads/water_consumption.geojson");
+                var geojson = File.ReadAllText("/home/fernando/Documents/workspace/WaterWatch/Assets/water_consumption.geojson");
                 dynamic jsonObj = JsonConvert.DeserializeObject(geojson);
 
                 foreach (var feature in jsonObj["features"])
@@ -47,15 +47,15 @@ namespace WaterWatch.Repository
                     string str_avgMonthlyKL = feature["properties"]["averageMonthlyKL"];
                     string str_geometry = feature["geometry"]["coordinates"].ToString(Newtonsoft.Json.Formatting.None);
 
-                    string conv_averageMontlyKL = str_avgMonthlyKL.Replace(".0", "");
-                    int avgMontlyKL = Convert.ToInt32(conv_averageMontlyKL);
+                    string conv_averageMonthlyKL = str_avgMonthlyKL.Replace(".0", "");
+                    int avgMontlyKL = Convert.ToInt32(conv_averageMonthlyKL);
 
 
                     WaterConsumption consumption = new WaterConsumption()
                     {
                         neighbourhood = str_neighbourhood,
                         suburb_group = str_suburb_group,
-                        averageMontlyKL = avgMontlyKL,
+                        averageMonthlyKL = avgMontlyKL,
                         coordinates = str_geometry
                     };
 

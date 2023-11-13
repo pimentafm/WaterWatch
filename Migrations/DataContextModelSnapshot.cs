@@ -29,7 +29,7 @@ namespace WaterWatch.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("averageMontlyKL")
+                    b.Property<int>("averageMonthlyKL")
                         .HasColumnType("integer");
 
                     b.Property<string>("coordinates")

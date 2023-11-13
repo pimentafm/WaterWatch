@@ -7,10 +7,10 @@ namespace WaterWatch.Models
 {
     public class WaterConsumption
     {
-        public int id { get; set; }
-        public string neighbourhood { get; set; }
-        public string suburb_group { get; set; }
+        public int Id { get; set; }
+        public required string neighbourhood { get; set; }
+        public required string suburb_group { get; set; }
         public int averageMontlyKL { get; set; }
-        public string coordinates { get; set; }
+        public required string coordinates { get; set; }
     }
 }

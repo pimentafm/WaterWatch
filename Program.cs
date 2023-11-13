@@ -9,7 +9,15 @@ builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(
     builder.Configuration.GetConnectionString("DefaultConnection")
 ));
 
-builder.Services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
+builder.Services.AddScoped<IDataContext>(provider =>
+{
+    var dataContext = provider.GetService<DataContext>();
+    if (dataContext == null)
+    {
+        throw new Exception("Could not resolve DataContext.");
+    }
+    return dataContext;
+});
 builder.Services.AddScoped<IWaterConsumptionRepository, WaterConsumptionRepository>();
 
 builder.Services.AddControllersWithViews();

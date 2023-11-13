@@ -37,26 +37,26 @@ namespace WaterWatch.Repository
             {
                 Console.WriteLine("No data found in database. Adding data from JSON file.");
 
-                var geojson = System.IO.File.ReadAllText(@"/home/fernando/Downloads/water_consumption.geojson");
+                var geojson = File.ReadAllText("/home/fernando/Downloads/water_consumption.geojson");
                 dynamic jsonObj = JsonConvert.DeserializeObject(geojson);
 
-                foreach (var feature in jsonObj.features)
+                foreach (var feature in jsonObj["features"])
                 {
-                    string neighbourhood = feature.properties.neighbourhood;
-                    string suburb_group = feature.properties.suburb_group;
-                    string averageMontlyKL = feature.properties.averageMontlyKL;
-                    string geometry = feature.geometry.coordinates.ToString(Newtonsoft.Json.Formatting.None);
+                    string str_neighbourhood = feature["properties"]["neighbourhood"];
+                    string str_suburb_group = feature["properties"]["suburb_group"];
+                    string str_avgMonthlyKL = feature["properties"]["averageMonthlyKL"];
+                    string str_geometry = feature["geometry"]["coordinates"].ToString(Newtonsoft.Json.Formatting.None);
 
-                    string conv_averageMontlyKL = averageMontlyKL.Replace(".0", "");
-                    int avgMontlyKL = Int32.Parse(conv_averageMontlyKL);
+                    string conv_averageMontlyKL = str_avgMonthlyKL.Replace(".0", "");
+                    int avgMontlyKL = Convert.ToInt32(conv_averageMontlyKL);
 
 
                     WaterConsumption consumption = new WaterConsumption()
                     {
-                        neighbourhood = neighbourhood,
-                        suburb_group = suburb_group,
+                        neighbourhood = str_neighbourhood,
+                        suburb_group = str_suburb_group,
                         averageMontlyKL = avgMontlyKL,
-                        coordinates = geometry
+                        coordinates = str_geometry
                     };
 
                     _context.Consumptions.Add(consumption);

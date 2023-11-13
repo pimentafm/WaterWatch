@@ -23,11 +23,11 @@ namespace WaterWatch.Migrations
 
             modelBuilder.Entity("WaterWatch.Models.WaterConsumption", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("averageMontlyKL")
                         .HasColumnType("integer");
@@ -44,7 +44,7 @@ namespace WaterWatch.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Consumptions");
                 });
